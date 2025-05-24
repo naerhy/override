@@ -290,14 +290,14 @@ We know that to solve this level, we have to:
 - write a string of more that 5 characters as first input
 - write a number equal to the result of all the XOR operations performed in `auth()` as second input
 
-But first we have to find the result of all the XOR operations. Thanks to the decompiled output, we can reproduce the code performed in the executable on our local setup and displays the result. The content of the string does not matter, as long as it respects the minimum length. We choose `"......"`.
+But first we have to find the result of all the XOR operations. Thanks to the decompiled output, we can reproduce the code performed in the executable on our local setup and displays the result. The content of the string does not matter, as long as it respects the minimum length. We choose `......`.
 
 ```c
 #include <stdio.h>
 
 int main(void)
 {
-  char* s = "      ";
+  char* s = "......";
   int nb = (s[3] ^ 4919) + 6221293;
   for (int i = 0; i < 6; i++) {
     nb += (nb ^ (unsigned int)s[i]) % 1337;
@@ -310,23 +310,23 @@ int main(void)
 ```bash
 xxx@xxx:~$ vim main.c
 xxx@xxx:~$ gcc main.c && ./a.out 
-6230887
+6230901
 ```
 
-The result from all the XOR operations is `6230887`.
+The result from all the XOR operations is `6230901`.
 
-To complete this level, we have to call the executable and pass `"      "` followed by `6230887`,
+To complete this level, we have to call the executable and pass `......` followed by `6230901`,
 
 ```bash
 level06@OverRide:~$ ./level06 
 ***********************************
 *		level06		  *
 ***********************************
--> Enter Login:       
+-> Enter Login: ......
 ***********************************
 ***** NEW ACCOUNT DETECTED ********
 ***********************************
--> Enter Serial: 6230887
+-> Enter Serial: 6230901
 Authenticated!
 $ cat /home/users/level07/.pass
 GbcPDRgsFK77LNnnuh7QyFYA2942Gp8yKj9KrWD8
